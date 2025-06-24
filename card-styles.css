@@ -1,0 +1,151 @@
+/* Lithic Card Embed Styles - Matching Dashboard Design */
+
+.card {
+  display: grid;
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "header header"
+    "pan pan"
+    "expiry cvv";
+  box-sizing: border-box;
+  padding: 24px;
+  width: 340px;
+  height: 200px;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border-radius: 12px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  font-family:
+    "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New",
+    monospace;
+  color: white;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.pan,
+.expiry,
+.cvv {
+  grid-area: pan;
+  height: fit-content;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.expiry {
+  letter-spacing: 0;
+  grid-area: expiry;
+  font-size: 14px;
+}
+
+.cvv {
+  letter-spacing: 0;
+  grid-area: cvv;
+  font-size: 14px;
+}
+
+.expiry:before,
+.cvv:before {
+  content: "Valid";
+  margin-right: 0.5em;
+  opacity: 0.6;
+  font-weight: 400;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.cvv:before {
+  content: "CVV";
+}
+
+/* Hover effects for clickable elements */
+div[onclick^="copyToClip"]:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card number styling */
+.pan {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f9fafb;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Expiry and CVV styling */
+.expiry,
+.cvv {
+  color: #e5e7eb;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .card {
+    width: 300px;
+    height: 180px;
+    padding: 20px;
+  }
+
+  .pan {
+    font-size: 16px;
+  }
+
+  .expiry,
+  .cvv {
+    font-size: 12px;
+  }
+}
+
+/* Focus states for accessibility */
+div[onclick^="copyToClip"]:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animation for card reveal */
+.card.revealed {
+  animation: cardReveal 0.3s ease-out;
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
